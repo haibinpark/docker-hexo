@@ -2,8 +2,8 @@
 set -e
 set -x
 
-GITHUB_DEPLOY_KEY=${SSH_KEY:-}
-HEXO_THEME=${THEME:-}
+GITHUB_DEPLOY_KEY=${GITHUB_DEPLOY_KEY:-}
+HEXO_THEME=${HEXO_THEME:-}
 AUTO_DEPLOY_WEB_HOOK_PORT=${AUTO_DEPLOY_WEB_HOOK_PORT:"14000"}
 AUTO_DEPLOY_WEB_HOOK_HASHKEY=${AUTO_DEPLOY_WEB_HOOK_HASHKEY:""}
 
@@ -19,6 +19,7 @@ case $THEME:
     *) echo "default theme!";;
 
 esac
+
 fi
 
 exec supervisord -c /etc/supervisor/supervisord.conf

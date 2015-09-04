@@ -19,6 +19,7 @@ docker run \
 	--name my_blog -d \
 	-p 4000:4000 \
 	-p 14000:14000 \
+	-p 12222:22 \
 	-e GITHUB_DEPLOY_KEY='' \
 	-e AUTO_DEPLOY_WEB_HOOK_PORT='14000' \
 	-e AUTO_DEPLOY_WEB_HOOK_HASHKEY='' \
