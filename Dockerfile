@@ -21,6 +21,7 @@ WORKDIR /root
 
 RUN mkdir blog && cd blog && \
     npm install hexo-cli -g && \
+    npm install github-webhook-handler -g && \
     hexo init && \
     npm install && \
     npm install hexo-generator-sitemap --save && \
@@ -44,6 +45,8 @@ EXPOSE 22
 
 ADD assets /hexo
 ADD config/hexo.conf /etc/supervisor/conf.d/hexo.conf
+ADD adds/deploy.js /root/deploy.js
+ADD assets/build.sh /root/deloy-blog.sh
+ADD config/auto_publish_hexo.conf /etc/supervisor/conf.d/auto_publish_hexo.conf
 
 CMD ["/hexo/startup"]
-
