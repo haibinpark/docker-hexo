@@ -21,14 +21,14 @@ WORKDIR /root
 
 RUN mkdir blog && cd blog && \
     npm install hexo-cli -g && \
-    npm install github-webhook-handler -g && \
-    hexo init && \
-    npm install && \
-    npm install hexo-generator-sitemap --save && \
-    npm install hexo-generator-feed --save && \
-    npm install hexo-deployer-git --save && \
-    npm un hexo-renderer-marked --save && \
-    npm i hexo-renderer-markdown-it --save
+    npm install github-webhook-handler -g
+#    hexo init && \
+#    npm install && \
+#    npm install hexo-generator-sitemap --save && \
+#   npm install hexo-generator-feed --save && \
+#   npm install hexo-deployer-git --save && \
+#   npm un hexo-renderer-marked --save && \
+#   npm i hexo-renderer-markdown-it --save
 
 WORKDIR /root/blog/
 
@@ -36,8 +36,6 @@ VOLUME ["/root/blog/source"]
 VOLUME ["/root/blog/themes"] 
 
 RUN echo "export LC_ALL=C" >> /root/.bashrc                                               
-
-# Install Supervisor.
 
 EXPOSE 4000
 

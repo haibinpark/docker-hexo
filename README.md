@@ -8,8 +8,9 @@ Hexo 博客的Docker镜像
 ## Usage
   
 - GITHUB_DEPLOY_KEY github的部署应用设置的key  
-- AUTO_DEPLOY_WEB_HOOK_PORT 自动部署hexo blog的webhook地址 ***默认为14000*** 
-- AUTO_DEPLOY_WEB_HOOK_HASHKEY  自动部署hexo blog的webhoook设置的hashkey  
+- AUTO_DEPLOY_WEB_HOOK_PORT 自动部署hexo blog的webhook地址 ***默认为14000***   
+- AUTO_DEPLOY_WEB_HOOK_HASHKEY  自动部署hexo blog的webhoook设置的hashkey    
+- GITHUB_REMOTE_ADDR github的远程地址    
 
 
 ## Startup  
