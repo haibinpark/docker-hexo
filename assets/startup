@@ -30,7 +30,8 @@ if [ ! -f "/root/blog/package.json" ];then
     npm install
     npm install hexo-generator-sitemap --save 
     npm install hexo-generator-feed --save 
-    npm install hexo-deployer-git --save                     npm un hexo-renderer-marked --save 
+    npm install hexo-deployer-git --save
+    npm un hexo-renderer-marked --save 
     npm i hexo-renderer-markdown-it --save
 fi
 
