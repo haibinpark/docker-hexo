@@ -10,7 +10,9 @@ ENV REFRESHED_AT 2015-09-4 12:00
 
 # USER root
 
-RUN apt-get update && \
+RUN \
+    sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list && \
+    apt-get update && \
     apt-get install -y nodejs curl git-core && \
     update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10 && \
     curl -L https://npmjs.org/install.sh | sh && \
