@@ -50,7 +50,7 @@ ADD assets/build.sh /root/deploy-blog.sh
 ADD config/auto_publish_hexo.conf /etc/supervisor/conf.d/auto_publish_hexo.conf
 ADD config/config /root/.ssh/config
 
-RUN ln -sf /hexo/startup /root/init
+RUN ln -sf /hexo/startup /root/startup
 
 WORKDIR /root
 

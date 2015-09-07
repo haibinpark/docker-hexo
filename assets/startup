@@ -30,7 +30,7 @@ if [ ! -f "/root/.ssh/id_rsa" ] ; then
 fi
 
 if [ ! -f "/root/blog/package.json" ];then
-    git pull
+    git pull origin master
     npm install
     npm install hexo-generator-sitemap --save 
     npm install hexo-generator-feed --save 
