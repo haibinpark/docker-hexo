@@ -21,7 +21,7 @@ if [ -z `git remote show` ] ; then
 fi
 
 if [ ! -f "/root/.ssh/id_rsa" ] ; then
-  ssh-keygen -t rsa -f ~/.ssh/id_rsa -P "hexosecret"
+  ssh-keygen -t rsa -f ~/.ssh/id_rsa -q -N ""
   rm -rf authorized_keys
   cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys
   cat /root/.ssh/authorized_keys 
@@ -44,8 +44,10 @@ if [ "${IS_NPM_INSTALL}"x = "true"x ]; then
 fi
 
 if [ -f "/root/deploy.js" ]; then
-   sed -i 's/{{WEB_HOOK_HASH_KEY}}/"${AUTO_DEPLOY_WEB_HOOK_HASHKEY}"/g' /root/deploy.js  
-   sed -i 's/{{PORT}}/"{$AUTO_DEPLOY_WEB_HOOK_PORT}"/g' /root/deploy.js  
+   sed -i -e"s/{{WEB_HOOK_HASH_KEY}}/${AUTO_DEPLOY_WEB_HOOK_HASHKEY}/g" /root/deploy.js  
+   sed -i -e"s/{{PORT}}/${AUTO_DEPLOY_WEB_HOOK_PORT}/g" /root/deploy.js  
 fi
+
+hexo d -g
 
 exec supervisord -c /etc/supervisor/supervisord.conf

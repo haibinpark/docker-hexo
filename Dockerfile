@@ -6,7 +6,7 @@ FROM cloudcube/base
 
 MAINTAINER David "zhaohaibin@outlook.com"
 
-ENV REFRESHED_AT 2015-09-4 12:00
+ENV REFRESHED_AT 2015-09-6 12:00
 
 # USER root
 
@@ -46,7 +46,12 @@ EXPOSE 22
 ADD assets /hexo
 ADD config/hexo.conf /etc/supervisor/conf.d/hexo.conf
 ADD adds/deploy.js /root/deploy.js
-ADD assets/build.sh /root/deloy-blog.sh
+ADD assets/build.sh /root/deploy-blog.sh
 ADD config/auto_publish_hexo.conf /etc/supervisor/conf.d/auto_publish_hexo.conf
+ADD config/config /root/.ssh/config
+
+RUN ln -sf /hexo/startup /root/init
+
+WORKDIR /root
 
 CMD ["/hexo/startup"]
