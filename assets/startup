@@ -13,6 +13,11 @@ if [ ! -d "/root/blog/.git" ];then
     git init
 fi
 
+if [ ! -d "/root/auto_publish" ];then
+  mkdir /root/auto_publish -p
+  mv /root/deploy.js /root/auto_publish/deploy.js
+  npm install github-webhook-handler --save
+fi
 
 
 if [ -z `git remote show` ] ; then
@@ -43,9 +48,9 @@ if [ "${IS_NPM_INSTALL}"x = "true"x ]; then
     npm install
 fi
 
-if [ -f "/root/deploy.js" ]; then
-   sed -i -e"s/{{WEB_HOOK_HASH_KEY}}/${AUTO_DEPLOY_WEB_HOOK_HASHKEY}/g" /root/deploy.js  
-   sed -i -e"s/{{PORT}}/${AUTO_DEPLOY_WEB_HOOK_PORT}/g" /root/deploy.js  
+if [ -f "/root/auto_publish/deploy.js" ]; then
+   sed -i -e"s/{{WEB_HOOK_HASH_KEY}}/'${AUTO_DEPLOY_WEB_HOOK_HASHKEY}'/g" /root/auto_publish/deploy.js  
+   sed -i -e"s/{{PORT}}/${AUTO_DEPLOY_WEB_HOOK_PORT}/g" /root/auto_publish/deploy.js  
 fi
 
 hexo d -g
