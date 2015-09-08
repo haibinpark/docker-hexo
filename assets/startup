@@ -23,8 +23,8 @@ fi
 if [ ! -f "/root/.ssh/id_rsa" ] ; then
   ssh-keygen -t rsa -f ~/.ssh/id_rsa -q -N ""
   rm -rf authorized_keys
-  cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys
-  cat /root/.ssh/authorized_keys 
+  #cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys
+  cat /root/.ssh/id_rsa.pub 
   echo "Please copy above key to github deploy key,then continue"
   read -p "Press Return Key to continue........" yes
 fi
