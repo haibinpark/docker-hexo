@@ -32,7 +32,7 @@ if [ ! -f "/root/.ssh/id_rsa" ] ; then
   #cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys
   cat /root/.ssh/id_rsa.pub 
   echo "Please copy above key to github deploy key,then continue"
-  sleep 60s
+  sleep 180s
   # read -p "Press Return Key to continue........" yes
 fi
 
@@ -57,9 +57,9 @@ if [ -f "/root/auto_publish/deploy.js" ]; then
     sed -i -e"s/{{PORT}}/${AUTO_DEPLOY_WEB_HOOK_PORT}/g" /root/auto_publish/deploy.js  
 fi
 
-if [ -f "/root/build.sh" ]; then
+if [ -f "/root/deploy-blog.sh" ]; then
     cd /root
-    sed -i -e"s/{{BRANCH}}/${GITHUB_BRANCH}/g" /root/build.sh  
+    sed -i -e"s/{{BRANCH}}/${GITHUB_BRANCH}/g" /root/deploy-blog.sh  
 fi
 
 exec supervisord -c /etc/supervisor/supervisord.conf
