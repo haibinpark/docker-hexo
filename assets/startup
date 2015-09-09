@@ -6,6 +6,7 @@ AUTO_DEPLOY_WEB_HOOK_PORT=${AUTO_DEPLOY_WEB_HOOK_PORT:-"14000"}
 AUTO_DEPLOY_WEB_HOOK_HASHKEY=${AUTO_DEPLOY_WEB_HOOK_HASHKEY:-""}
 GITHUB_REMOTE_ADDR=${GITHUB_REMOTE_ADDR:-}
 IS_NPM_INSTALL=${IS_NPM_INSTALL:-"false"}
+GITHUB_BRANCH=${GITHUB_BRANCH:-"master"}
 
 cd /root/blog
 
@@ -31,7 +32,8 @@ if [ ! -f "/root/.ssh/id_rsa" ] ; then
   #cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys
   cat /root/.ssh/id_rsa.pub 
   echo "Please copy above key to github deploy key,then continue"
-  read -p "Press Return Key to continue........" yes
+  sleep 60s
+  # read -p "Press Return Key to continue........" yes
 fi
 
 if [ ! -f "/root/blog/package.json" ];then
@@ -49,10 +51,15 @@ if [ "${IS_NPM_INSTALL}"x = "true"x ]; then
 fi
 
 if [ -f "/root/auto_publish/deploy.js" ]; then
-   sed -i -e"s/{{WEB_HOOK_HASH_KEY}}/'${AUTO_DEPLOY_WEB_HOOK_HASHKEY}'/g" /root/auto_publish/deploy.js  
-   sed -i -e"s/{{PORT}}/${AUTO_DEPLOY_WEB_HOOK_PORT}/g" /root/auto_publish/deploy.js  
+    cd /root/auto_publish
+    npm install github-webhook-handler --save
+    sed -i -e"s/{{WEB_HOOK_HASH_KEY}}/'${AUTO_DEPLOY_WEB_HOOK_HASHKEY}'/g" /root/auto_publish/deploy.js  
+    sed -i -e"s/{{PORT}}/${AUTO_DEPLOY_WEB_HOOK_PORT}/g" /root/auto_publish/deploy.js  
 fi
 
-hexo d -g
+if [ -f "/root/build.sh" ]; then
+    cd /root
+    sed -i -e"s/{{BRANCH}}/${GITHUB_BRANCH}/g" /root/build.sh  
+fi
 
 exec supervisord -c /etc/supervisor/supervisord.conf

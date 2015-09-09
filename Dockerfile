@@ -6,9 +6,9 @@ FROM cloudcube/base
 
 MAINTAINER David "zhaohaibin@outlook.com"
 
-ENV REFRESHED_AT 2015-09-6 12:00
+ENV REFRESHED_AT 2015-09-09 12:00
 
-# USER root
+USER root
 
 RUN \
     sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list && \
@@ -22,15 +22,7 @@ RUN \
 WORKDIR /root
 
 RUN mkdir blog && cd blog && \
-    npm install hexo-cli -g && \
-    npm install github-webhook-handler -g
-#    hexo init && \
-#    npm install && \
-#    npm install hexo-generator-sitemap --save && \
-#   npm install hexo-generator-feed --save && \
-#   npm install hexo-deployer-git --save && \
-#   npm un hexo-renderer-marked --save && \
-#   npm i hexo-renderer-markdown-it --save
+    npm install hexo-cli -g
 
 WORKDIR /root/blog/
 

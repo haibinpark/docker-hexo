@@ -2,9 +2,9 @@
 echo "build at `date`"
 cd /root/blog
 git clean -f
-git pull
+git pull origin master
 git fetch
-git checkout b master origin/master
+git checkout -b {{BRANCH}} origin/{{BRANCH}}
 hexo clean
-hexo d -g
+hexo g &
 echo "built successfully"
