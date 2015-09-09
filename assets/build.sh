@@ -7,4 +7,8 @@ git fetch
 git checkout -b {{BRANCH}} origin/{{BRANCH}}
 hexo clean
 hexo g &
+sleep 10s
+supervisorctl stop hexo
+sleep 10s
+supervisorctl start hexo
 echo "built successfully"
