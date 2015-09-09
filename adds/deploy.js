@@ -1,6 +1,6 @@
 var http = require('http')
 var createHandler = require('github-webhook-handler')
-var handler = createHandler({ path: '/incoming', secret: {{WEB_HOOK_HASH_KEY}} }) 
+var handler = createHandler({ path: '/autopub', secret: {{WEB_HOOK_HASH_KEY}} }) 
 // 上面的 secret 保持和 GitHub 后台设置的一致
  
 function run_cmd(cmd, args, callback) {
@@ -27,6 +27,6 @@ handler.on('push', function (event) {
   console.log('Received a push event for %s to %s',
     event.payload.repository.name,
     event.payload.ref);
-  run_cmd('sh', ['./deploy-blog.sh'], function(text){ console.log(text) });
+  run_cmd('sh', ['/root/deploy-blog.sh'], function(text){ console.log(text) });
 })
  
